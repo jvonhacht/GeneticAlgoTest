@@ -136,7 +136,8 @@ public class Player {
                 || Game.getMaze().getCell(getXPosition() - 2,getYPosition() - 2).isWall
                 || getYPosition()<30){
             stuck = true;
-            setFitness(1000);
+            //set to 0 if it hits wall.
+            setFitness(0);
         }
         if(!stuck) {
             if(genes[moves]==0) {
