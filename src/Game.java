@@ -19,6 +19,9 @@ public class Game extends JPanel{
     BufferedImage backBuffer;
     Insets insets;
 
+    /**
+     * Constructor.
+     */
     public Game() {
         maze = new MazeGenerator(800,800);
         p = new Population(50,true);
@@ -32,6 +35,9 @@ public class Game extends JPanel{
         System.exit(0);
     }
 
+    /**
+     * Method that controls game speed and methods ran in each cycle.
+     */
     public void run() {
         initialize();
 
@@ -51,6 +57,9 @@ public class Game extends JPanel{
         setVisible(false);
     }
 
+    /**
+     * Initialise.
+     */
     public void initialize() {
         frame = new JFrame("Genetic algorithm");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +77,9 @@ public class Game extends JPanel{
         backBuffer = new BufferedImage(windowWidth, windowHeight,   BufferedImage.TYPE_INT_RGB);
     }
 
+    /**
+     * Update population and keep track of ticks.
+     */
     public void update() {
         //move pop
         for (int i=0; i<p.getSize(); i++) {
@@ -97,6 +109,9 @@ public class Game extends JPanel{
         tickCount ++;
     }
 
+    /**
+     * Paint frame.
+     */
     public void draw() {
         frame.repaint();
         frame.add(new PaintMap());
@@ -119,6 +134,11 @@ public class Game extends JPanel{
             g2d.setColor(Color.GRAY);
             g2d.drawString("Generation: " + Integer.toString(genCount),50,20);
         }
+
+        /**
+         * Painting obstacles.
+         * @param g2d
+         */
         private void paintMaze(Graphics2D g2d) {
             for(int i=0; i<maze.getHeight(); i++) {
                 for(int j=0; j<maze.getWidth(); j++) {
@@ -130,6 +150,11 @@ public class Game extends JPanel{
                 }
             }
         }
+
+        /**
+         * Painting players.
+         * @param g2d
+         */
         public void paintPlayer(Graphics2D g2d) {
             g2d.setColor(Color.red);
             int count = 0;

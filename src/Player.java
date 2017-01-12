@@ -100,6 +100,14 @@ public class Player {
     }
 
     /**
+     * Method to return if player is stuck.
+     * @return
+     */
+    public boolean getStuck() {
+        return stuck;
+    }
+
+    /**
      * Return size of gene.
      * @return
      */

@@ -114,6 +114,10 @@ public class Population {
 
     }
 
+    /**
+     * Set population.
+     * @param p Array of individuals.
+     */
     public void setIndividuals(Player[] p) {
         individuals = p;
     }

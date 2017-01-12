@@ -9,6 +9,11 @@ public class MazeGenerator {
     private static int HEIGHT;
     private static int WIDTH;
 
+    /**
+     * Constructor for obstacle course.
+     * @param width
+     * @param height
+     */
     public MazeGenerator(int width,int height) {
         this.HEIGHT = height;
         this.WIDTH = width;
@@ -16,26 +21,53 @@ public class MazeGenerator {
         mapGenerator();
     }
 
+    /**
+     * Check if current cell is a wall.
+     * @param x
+     * @param y
+     * @return boolean
+     */
     public boolean isWall(int x, int y) {
         return grid[x][y].getIsWall();
     }
 
+    /**
+     * Return cell at given x and y.
+     * @param x
+     * @param y
+     * @return Cell
+     */
     public Cell getCell(int x, int y) {
         return grid[x][y];
     }
 
+    /**
+     * Return height of cell grid.
+     * @return
+     */
     public static int getHeight() {
         return HEIGHT;
     }
 
+    /**
+     * Return width of cell grid.
+     * @return
+     */
     public static int getWidth() {
         return WIDTH;
     }
 
+    /**
+     * Return a random bool.
+     * @return
+     */
     public boolean randomBool() {
         return rand.nextBoolean();
     }
 
+    /**
+     * A maze with random cells (not used).
+     */
     public void randomMazeGenerator() {
         for (int i=0; i<HEIGHT-1 ; i+=5) {
             for (int j=0; j<WIDTH-1; j+=5) {
@@ -44,6 +76,9 @@ public class MazeGenerator {
         }
     }
 
+    /**
+     * Method to create the obstacle course.
+     */
     public void mapGenerator() {
         //fill with empty cells
         for(int i=0; i<WIDTH; i++) {
@@ -69,10 +104,10 @@ public class MazeGenerator {
         for (int i = 50; i<WIDTH-480; i += 5) {
             grid[i][150] = new Cell(true);
         }
-        for (int i = WIDTH/2+20; i<WIDTH-50; i += 5) { //second
+        for (int i = WIDTH/2+50; i<WIDTH-50; i += 5) { //second
             grid[i][250] = new Cell(true);
         }
-        for (int i = 50; i<WIDTH/2-20; i += 5) {
+        for (int i = 50; i<WIDTH/2-50; i += 5) {
             grid[i][250] = new Cell(true);
         }
         for (int i = 380; i<WIDTH-380; i += 5) { //third
