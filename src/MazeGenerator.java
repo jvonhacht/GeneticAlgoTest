@@ -6,8 +6,8 @@ import java.util.Random;
 public class MazeGenerator {
     private Random rand = new Random();
     private Cell[][] grid;
-    private static int HEIGHT;
-    private static int WIDTH;
+    public static int HEIGHT;
+    public static int WIDTH;
 
     /**
      * Constructor for obstacle course.
@@ -88,9 +88,10 @@ public class MazeGenerator {
         }
         //make walls
         for (int i = 50; i<WIDTH-50; i += 5) {
-            grid[i][30] = new Cell(true);
+            grid[i][30] = new Cell(true); //top
+            grid[i][HEIGHT-150] = new Cell(true); //bottom
         }
-        for (int i = 30; i<HEIGHT-300; i += 5) {
+        for (int i = 30; i<HEIGHT-150; i += 5) {
             grid[50][i] = new Cell(true);
             grid[WIDTH - 50][i] = new Cell(true);
         }
@@ -126,12 +127,5 @@ public class MazeGenerator {
                 grid[i][j] = new Cell(randomBool());
             }
         }*/
-        //make opening
-        for (int i=WIDTH/2-50; i<WIDTH/2+50; i++) {
-            for (int j=60; j<130 ; j++) {
-                grid[i][j] = new Cell(false);
-            }
-            grid[i][HEIGHT-50] = new Cell(false);
-        }
     }
 }

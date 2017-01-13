@@ -91,14 +91,15 @@ public class Game extends JPanel{
             calc.calcFitness(player);
         }
         //tick controller
-        if(tickCount>3599) {
+        if(tickCount>1200) {
             for (int i=0; i<p.getSize(); i++) {
                 p.getPlayer(i).setDefaultPos();
             }
             tickCount = 0;
             //new gen
             for (int i=0; i<p.getSize(); i++) {
-                System.out.print(p.getPlayer(i).getFitness() + ", ");
+                System.out.print("Fitness: " + p.getPlayer(i).getFitness() + ", ");
+                System.out.print("YPos: " + p.getPlayer(i).getYPosition() + ", ");
             }
             System.out.println("NEW LINE");
             Player[] newP = p.newGen();

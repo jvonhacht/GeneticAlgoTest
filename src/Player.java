@@ -17,7 +17,7 @@ public class Player {
     public Player() {
         xPosition = MazeGenerator.getWidth()/2;
         yPosition = 80;
-        defaultGeneLength = 3600;
+        defaultGeneLength = 800;
         genes = new int[defaultGeneLength];
         fitness = 50;
         rand = new Random();
@@ -29,10 +29,17 @@ public class Player {
      * Generate new player gene.
      */
     public void generatePlayer() {
+        int decidedDirection = rand.nextInt(4);
         for (int i=0; i<defaultGeneLength; i+=1) {
-            int direction = rand.nextInt(4);
+            int randDirection = rand.nextInt(4);
+            //Make every other move down.
             for (int j=0; j<1 ; j++) {
-                genes[i+j] = direction;
+                if(rand.nextBoolean()) {
+                    genes[i+j] = randDirection;
+                }
+                else {
+                    genes[i+j] = decidedDirection;
+                }
             }
         }
     }
@@ -136,6 +143,10 @@ public class Player {
      */
     public void move() {
         moves = moves % defaultGeneLength;
+        if(xPosition>750 || xPosition<50 || yPosition>650 || yPosition<30) {
+            stuck = true;
+        }
+
         if(Game.getMaze().getCell(getXPosition() + 2,getYPosition()).isWall
                 || Game.getMaze().getCell(getXPosition() - 2,getYPosition()).isWall
                 || Game.getMaze().getCell(getXPosition(),getYPosition() + 2).isWall
@@ -145,20 +156,19 @@ public class Player {
                 || getYPosition()<30){
             stuck = true;
             //set to 0 if it hits wall.
-            setFitness(0);
         }
         if(!stuck) {
             if(genes[moves]==0) {
-                yPosition -= 2;
+                yPosition -= 1;
             }
             if(genes[moves]==1) {
-                xPosition += 2;
+                xPosition += 1;
             }
             if(genes[moves]==2) {
-                yPosition += 2;
+                yPosition += 1;
             }
             if(genes[moves]==3) {
-                xPosition -= 2;
+                xPosition -= 1;
             }
             moves ++;
         }
