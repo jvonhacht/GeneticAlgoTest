@@ -3,7 +3,7 @@
  */
 public class FitnessCalc {
     private int goalY;
-    private final double FITNESSMULT_IF_STUCK = 0.85;
+    private final double FITNESSMULT_IF_STUCK = 0.7;
 
     /**
      * Ran when initialised. Get the goal y and x coordinate.
@@ -11,7 +11,7 @@ public class FitnessCalc {
      * @param height
      */
     public FitnessCalc(int width, int height) {
-        goalY = height-50;
+        goalY = height-150;
     }
 
     /**
@@ -19,12 +19,13 @@ public class FitnessCalc {
      * @param p
      */
     public void calcFitness(Player p) {
-        int difY = goalY - p.getYPosition();
-        p.setFitness(difY);
-
+        int diffY = Math.abs(p.getYPosition() - goalY) / 10;
         if(p.getStuck()) {
-            int difStuckY = (int)(difY * FITNESSMULT_IF_STUCK);
-            p.setFitness(difStuckY);
+            int diffStuckY = (int)(diffY * FITNESSMULT_IF_STUCK);
+            p.setFitness(diffStuckY);
+        }
+        else {
+            p.setFitness(diffY);
         }
     }
 }
