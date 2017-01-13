@@ -19,7 +19,7 @@ public class Player {
         yPosition = 80;
         defaultGeneLength = 800;
         genes = new int[defaultGeneLength];
-        fitness = 50;
+        fitness = 1000;
         rand = new Random();
         moves = 0;
         stuck = false;
@@ -146,16 +146,22 @@ public class Player {
         if(xPosition>750 || xPosition<50 || yPosition>650 || yPosition<30) {
             stuck = true;
         }
-
-        if(Game.getMaze().getCell(getXPosition() + 2,getYPosition()).isWall
-                || Game.getMaze().getCell(getXPosition() - 2,getYPosition()).isWall
-                || Game.getMaze().getCell(getXPosition(),getYPosition() + 2).isWall
-                || Game.getMaze().getCell(getXPosition(),getYPosition() - 2).isWall
-                || Game.getMaze().getCell(getXPosition() + 2,getYPosition() + 2).isWall
-                || Game.getMaze().getCell(getXPosition() - 2,getYPosition() - 2).isWall
-                || getYPosition()<30){
+        MazeGenerator maze = Game.getMaze();
+        //ugly code need better
+        if(maze.getCell(getXPosition() + 2,getYPosition()).isWall
+                || maze.getCell(getXPosition() - 2,getYPosition()).isWall
+                || maze.getCell(getXPosition(),getYPosition() + 2).isWall
+                || maze.getCell(getXPosition(),getYPosition() - 2).isWall
+                || maze.getCell(getXPosition() + 2,getYPosition() + 2).isWall
+                || maze.getCell(getXPosition() - 2,getYPosition() - 2).isWall
+                || maze.getCell(getXPosition() + 1,getYPosition()).isWall
+                || maze.getCell(getXPosition() - 1,getYPosition()).isWall
+                || maze.getCell(getXPosition(),getYPosition() + 1).isWall
+                || maze.getCell(getXPosition(),getYPosition() - 1).isWall
+                || maze.getCell(getXPosition() + 1,getYPosition() + 1).isWall
+                || maze.getCell(getXPosition() - 1,getYPosition() - 1).isWall
+                ){
             stuck = true;
-            //set to 0 if it hits wall.
         }
         if(!stuck) {
             if(genes[moves]==0) {
